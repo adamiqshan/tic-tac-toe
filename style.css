@@ -1,0 +1,151 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+:root{
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size)*0.9)
+}
+
+.board{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell{
+    height: var(--cell-size);
+    width: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7){
+    border-bottom: none;
+}
+
+.cell.x,
+.cell.o{
+    cursor: not-allowed;
+    
+}
+
+.cell.x::after,
+.cell.x::before,
+.cell.o::before{
+    background-color: black;
+}
+
+.board.x .cell:not(.o):not(.x):hover:after,
+.board.x .cell:not(.o):not(.x):hover:before,
+.board.o .cell:not(.o):not(.x):hover:before
+{
+    background-color: lightgrey;
+}
+
+.cell.x::after,
+.cell.x::before,
+.board.x .cell:not(.o):not(.x):hover:after,
+.board.x .cell:not(.o):not(.x):hover:before
+{
+    content: '';
+    position: absolute;
+    height: calc(var(--mark-size));
+    width: calc(var(--mark-size)*.15);
+    
+}
+
+.cell.x::before,
+.board.x .cell:not(.o):not(.x):hover:before{
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.o):not(.x):hover:after
+{
+    transform: rotate(-45deg);
+}
+
+.cell.o::after,
+.cell.o::before,
+.board.o .cell:not(.o):not(.x):hover:after,
+.board.o .cell:not(.o):not(.x):hover:before
+{
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cell.o::before,
+.board.o .cell:not(.o):not(.x):hover:before
+{
+    height: var(--mark-size);
+    width: var(--mark-size);
+    
+}
+
+.cell.o::after,
+.board.o .cell:not(.o):not(.x):hover:after
+{
+    height: calc(var(--mark-size) * .7);
+    width: calc(var(--mark-size) * .7);
+    background-color: white;
+}
+
+.winning-message{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.9);
+    display: none;
+    flex-direction: column;
+    color:white;
+    font-size: 5rem;
+}
+
+.winning-message button{
+    font-size: 3rem;
+    background-color: #fff;
+    border: 1px solid black;
+    padding: 0.25em 0.5em;
+}
+
+.winning-message button:hover{
+    filter: invert(1);
+}
+
+.winning-message.show{
+    display: flex;
+}
