@@ -7,4 +7,4 @@ TIC TAC TOE game with hover effects
 - JS
 
 ## 🎨 Preview
-Check out the live preview here → [Pepsi Landing Page](https://rg16j.csb.app/)
+Check out the live preview here → [Tic Tac Toe](https://rg16j.csb.app/)
